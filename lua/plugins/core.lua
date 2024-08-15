@@ -1,6 +1,7 @@
 return {
 	{ "folke/lazy.nvim"},
 	{ "LazyVim/LazyVim"},
+	{ "tpope/vim-fugitive"},
 {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
       dependencies = { 'nvim-lua/plenary.nvim' },
@@ -8,6 +9,7 @@ return {
 		local builtin = require('telescope.builtin')
 		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 		vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+		vim.keymap.set('n', '<leader>fwg', builtin.grep_string, {})
 		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 		vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
@@ -59,5 +61,25 @@ return {
     require("telescope").load_extension("undo")
   end,
 },
+	 {
+        "folke/trouble.nvim",
+        config = function()
+            require("trouble").setup({
+                icons = false,
+            })
 
+            vim.keymap.set("n", "<leader>tt", function()
+                require("trouble").toggle()
+            end)
+
+            vim.keymap.set("n", "[t", function()
+                require("trouble").next({skip_groups = true, jump = true});
+            end)
+
+            vim.keymap.set("n", "]t", function()
+                require("trouble").previous({skip_groups = true, jump = true});
+            end)
+
+        end
+    },
 }
