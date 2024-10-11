@@ -25,6 +25,7 @@ return {
                 "xml",
                 "yaml",
                 "go",
+                "ruby",
             },
             highlight = { enable = true },
             incremental_selection = {
